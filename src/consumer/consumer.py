@@ -12,12 +12,9 @@ def consume_message():
     try:
         rabbitmq_host = os.environ['RABBITMQ_HOST']
         rabbitmq_port = int(os.environ['RABBITMQ_PORT'])
-        
-        # Base64 kodlu kullanıcı adı ve şifreyi çözme
-        rabbitmq_user_base64 = os.environ['RABBITMQ_USER']
-        rabbitmq_password_base64 = os.environ['RABBITMQ_PASSWORD']
-        rabbitmq_user = base64.b64decode(rabbitmq_user_base64).decode('utf-8')
-        rabbitmq_password = base64.b64decode(rabbitmq_password_base64).decode('utf-8')
+
+        rabbitmq_user = os.environ['RABBITMQ_USER']
+        rabbitmq_password = os.environ['RABBITMQ_PASSWORD']
         
         print(rabbitmq_host, rabbitmq_port, rabbitmq_user, rabbitmq_password)
     except KeyError as e:

@@ -11,10 +11,9 @@ def send_message():
     try:
         rabbitmq_host = os.environ['RABBITMQ_HOST']
         rabbitmq_port = int(os.environ['RABBITMQ_PORT'])
-        rabbitmq_user_base64 = os.environ['RABBITMQ_USER']
-        rabbitmq_password_base64 = os.environ['RABBITMQ_PASSWORD']
-        rabbitmq_user = base64.b64decode(rabbitmq_user_base64).decode('utf-8')
-        rabbitmq_password = base64.b64decode(rabbitmq_password_base64).decode('utf-8')
+        rabbitmq_user = os.environ['RABBITMQ_USER']
+        rabbitmq_password = os.environ['RABBITMQ_PASSWORD']
+
         
         logging.info(f"Connecting to RabbitMQ at {rabbitmq_host}:{rabbitmq_port} with user {rabbitmq_user}")
     except KeyError as e:
