@@ -1,0 +1,5 @@
+apiVersion: v2
+name: my-rabbitmq
+description: A Helm chart for RabbitMQ
+version: 0.1.0
+appVersion: 3.8.9
