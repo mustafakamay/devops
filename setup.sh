@@ -83,7 +83,6 @@ cd ../../..
 
 echo "15. Starting Minikube cluster with Terraform..."
 cd devops-task/terraform
-terraform init
 terraform apply -auto-approve
 
 echo "Setup completed and applications are running."
