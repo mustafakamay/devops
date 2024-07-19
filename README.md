@@ -11,12 +11,8 @@ This project automates the installation and configuration of an application usin
 
 2.**Copy the setup.sh file to your machine**
 
-3.**Make the setup script executable**
+3.**Make the setup script executable and run script file**
    ```sh
    chmod +x setup.sh
-
-
-4.**Run the setup script**
-  ```sh
    ./setup.sh
 
