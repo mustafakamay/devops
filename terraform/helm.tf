@@ -61,12 +61,15 @@ resource "helm_release" "consumer" {
     name  = "rabbitmqConfigMap"
     value = "rabbitmq-config"
   }
+  
+  depends_on = [
+    helm_release.rabbitmq
+  ]
 }
 
 resource "helm_release" "producer" {
   name       = "producer"
   chart      = "../helm/helm-producer"
-
 
   set {
     name  = "rabbitmqSecret"
@@ -77,4 +80,8 @@ resource "helm_release" "producer" {
     name  = "rabbitmqConfigMap"
     value = "rabbitmq-config"
   }
+  
+  depends_on = [
+    helm_release.rabbitmq
+  ]
 }
