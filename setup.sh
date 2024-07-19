@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 set -e
 
 echo "1. Starting updates and installing necessary dependencies..."
@@ -9,12 +8,13 @@ sudo apt-get install -y apt-transport-https ca-certificates curl software-proper
 
 echo "2. Starting Docker installation..."
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Add Docker repository and press enter automatically
+echo | sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
 sudo apt-get update -y
-sudo apt-get install -y docker-ce
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 echo "3. Updating Docker CPU and memory settings..."
 sudo bash -c 'cat <<EOF > /etc/docker/daemon.json
@@ -63,7 +63,7 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 echo "11. Starting Terraform installation..."
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+echo | sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 sudo apt-get update -y
 sudo apt-get install -y terraform
 
@@ -75,14 +75,17 @@ git clone https://github.com/mustafakamay/devops.git
 cd devops
 
 echo "14. Building Docker images..."
-cd devops-task/src/producer
+cd src/producer
 docker build -t producer:latest .
 cd ../consumer
 docker build -t consumer:latest .
-cd ../../..
+cd ../..
 
-echo "15. Starting Minikube cluster with Terraform..."
-cd devops-task/terraform
+echo "15. Initializing Terraform..."
+cd terraform
+terraform init
+
+echo "16. Starting Minikube cluster with Terraform..."
 terraform apply -auto-approve
 
 echo "Setup completed and applications are running."
