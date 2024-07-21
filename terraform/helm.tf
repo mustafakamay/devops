@@ -1,11 +1,11 @@
 provider "kubernetes" {
-  config_path = "~/.kube/config"
+  config_path = var.kubeconfig_path
 }
 
 provider "helm" {
   burst_limit = 900
   kubernetes {
-    config_path = "~/.kube/config"
+    config_path = var.kubeconfig_path
   }
 }
 
@@ -17,12 +17,12 @@ resource "helm_release" "rabbitmq" {
 
   set {
     name  = "auth.username"
-    value = "user"
+    value = var.rabbitmq_username
   }
 
   set {
     name  = "auth.password"
-    value = "hkvU1bFiHGvm9zER"
+    value = var.rabbitmq_password
   }
 }
 
@@ -32,8 +32,8 @@ resource "kubernetes_secret" "rabbitmq_credentials" {
     namespace = "default"
   }
   data = {
-    "rabbitmq-username" = "user"
-    "rabbitmq-password" = "hkvU1bFiHGvm9zER"
+    "rabbitmq-username" = var.rabbitmq_username
+    "rabbitmq-password" = var.rabbitmq_password
   }
 }
 
