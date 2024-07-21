@@ -11,8 +11,11 @@ This project automates the installation and configuration of an application usin
 
 2.**Copy the setup.sh file to your machine**
 
-3.**Make the setup script executable and run script file**
+3.**Make the setup script executable and run script file.After that you can check your pods.**
    ```sh
    chmod +x setup.sh
    ./setup.sh
+   kubectl get pods
+   kubectl logs -f [pod_name]
+
 
