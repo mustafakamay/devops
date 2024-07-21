@@ -1,7 +1,7 @@
 
 # DevOps Project
 
-This project automates the installation and configuration of an application using Docker, Kubernetes, Minikube, Helm, and Terraform. The project facilitates communication between application components using RabbitMQ. Follow the steps below to set up the project.
+This project automates the installation and configuration of an application using Docker, Kubernetes, Minikube, Helm, and Terraform. The project facilitates communication between application components using RabbitMQ. Follow the steps below to set up the project.You can use on Ubuntu Server.
 
 ## Setup Instructions
 
